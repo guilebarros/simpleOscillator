@@ -47,10 +47,23 @@ public:
 
 private:
     
-    // lambda function
+    // lambda function(sine)
+    //juce::dsp::Oscillator<float> osc { [] (float x) { return std::sin (x); }};
     
-    juce::dsp::Oscillator<float> osc { [] (float x) { return std::sin (x); }};
+    // lambda function(saw)
+    //juce::dsp::Oscillator<float> osc { [](float x) { return x / juce::MathConstants<float>::pi; }};
+    
+    
+    // lambda function(square)
+    juce::dsp::Oscillator<float> osc { [](float x) { return x < 0.0f ? -1.0f : 1.0f; }, 200};
+    
     juce::dsp::Gain<float> gain;
+    
+    // WAVE EQUATIONS
+    
+    // { return std::sin (x); }  // sine wave
+    // { return x / juce::MathConstants<float>::pi; } // saw wave
+    // { return x < 0.0f ? -1.0f : 1.0f; } // square wave
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleOscillatorAudioProcessor)
 };
